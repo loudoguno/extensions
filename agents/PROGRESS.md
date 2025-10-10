@@ -109,6 +109,16 @@ ea0e2d9 (HEAD -> main, origin/main) Add Gong Raycast extension with confetti and
 
 ---
 
-**Last Updated**: October 8, 2025 - Session 1 Complete
+## 📝 Notes & Issues
+
+### October 9, 2025
+- **Issue**: Discovered accidental `~/` directories in `balloons/` and `balloons-fancy/` extensions
+  - These appear to be temporary/accidental directories containing only empty Library folders
+  - Deleted them for cleanup
+  - Will monitor if they reappear to identify the source
+
+---
+
+**Last Updated**: October 9, 2025
 **Next Session**: Additional extensions or enhancements
 **Status**: Gong extension live and available to SalesSprint team members
