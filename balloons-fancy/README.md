@@ -254,16 +254,63 @@ Want to add a new effect? Here's how:
 6. **Add to `package.json`** commands array
 7. **Rebuild and reinstall**: `./build.sh && cp -r build/BalloonsApp.app /Applications/`
 
-## Future Enhancement Ideas
+## Visual Effects Roadmap 🎯
 
-### New Effects
-- [x] Snow/Blizzard ❄️ (DONE!)
-- [ ] Confetti effect
-- [ ] Hearts floating up
-- [ ] Shooting stars
-- [ ] Sparkles/glitter
-- [ ] Falling leaves (autumn theme)
-- [ ] Rain/storm effect
+We're building a comprehensive library of celebration and ambient effects! Here's our plan:
+
+**Strategy:** Start with particle system variations (we already have the engine!), then add medium-complexity effects, and finally tackle character animations. This approach lets us rapidly build a diverse library while learning what works best.
+
+### 🚀 Current Sprint (Next Up!)
+**Phase 1: Quick Particle Variants** (~3-4 hours total)
+- [ ] 🧁 Cupcake Explosion - Pastel fireworks variant (30min)
+- [ ] 🔥 Campfire Sparks - Upward embers with glow (45min)
+- [ ] 🪶 Feather Fall - Gentle falling with rotation (45min)
+- [ ] 🌸 Cherry Blossom Drift - Pink petals drifting down (45min)
+- [ ] 🍁 Autumn Leaves - Leaves with accumulation (1hr)
+
+**Phase 2: High-Impact Effects** (~4-5 hours total)
+- [ ] 🍾 Champagne Pop - Cork + rising bubbles (1.5hrs)
+- [ ] 🌈 Rainbow Arc - Gradient arc with shimmer (1hr)
+- [ ] 🦋 Butterflies - Organic flutter paths (1.5hrs)
+- [ ] 🧨 Explosion - Shockwave + debris (1hr)
+
+**Phase 3: Character Animations** (Proof of concept)
+- [ ] 🐔 Chicken Run - First sprite animation test (2hrs)
+
+### 📋 Full Effects Backlog
+
+**Tier S - Easy Particle Systems:**
+- [ ] 💝 Hearts Float Up
+- [ ] ⭐ Shooting Stars
+- [ ] 🎊 Confetti Cannon
+
+**Tier A - Medium Complexity:**
+- [ ] 🚀 Launch Sequence
+- [ ] 💻 Matrix Rain
+- [ ] 👾 8-Bit Pixels
+
+**Tier B - Character Fun:**
+- [ ] 🦆 Duck Crossing
+- [ ] 🐶 Puppy Parade
+- [ ] 🦜 Tropical Flight
+
+**Tier C - Complex Multi-Element:**
+- [ ] 🕺 Dance Party (lights + confetti)
+- [ ] 🪐 Galaxy Warp
+- [ ] 🦈 Shark Attack
+- [ ] 🧙 Wizard Spell Gone Wrong
+
+**Tier D - Challenging:**
+- [ ] 🌪️ Tornado (with flying cow!)
+- [ ] 🧻 Toilet Paper Storm
+- [ ] 🤖 Robot Parade
+- [ ] 🪩 Barbie Glitter Bomb
+
+**Ambitious / Fun Ideas:**
+- [ ] 🌊 Ocean Splash
+- [ ] 🐮 Cowabunga
+- [ ] 🐱 Cat Nap
+- [ ] 🐒 Banana Chaos
 
 ### Effect Improvements
 **Fireworks:**
@@ -280,11 +327,12 @@ Want to add a new effect? Here's how:
 - [ ] Different snowflake patterns
 
 ### General Features
-- [ ] Better sound effects for all animations (high priority!)
+- [ ] **Better sound effects for all animations** (HIGH PRIORITY after Phase 1!)
 - [ ] Configurable settings (count, speed, colors)
 - [ ] Multi-monitor support
 - [ ] Keyboard shortcuts to trigger effects
 - [ ] Custom color schemes
+- [ ] Effect intensity modes (gentle/normal/extreme)
 
 ## Credits
 
