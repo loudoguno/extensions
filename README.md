@@ -17,16 +17,20 @@ A simple celebration extension that displays colorful animated balloons in your 
 
 ---
 
-### 🎈✨ Balloons Fancy
-An advanced celebration extension with native macOS system-wide overlay balloons.
+### 🎈✨🎆 Visual Effects (Balloons Fancy)
+An advanced celebration extension with native macOS system-wide overlay effects.
+
+**Available Effects:**
+- 🎈 Balloons: 50 balloons with 24 vibrant colors, falling animation
+- 🎆 Fireworks: 15-20 explosive bursts with radiating particles
 
 **Features:**
 - System-wide overlay (appears over all apps)
-- 50 balloons with 24 vibrant colors
-- Variable balloon sizes (60-150%)
+- Multiple visual effects from one app
+- Variable sizes and colors
 - Native Swift/SwiftUI performance
 - Unique random pattern each time
-- True confetti-style experience
+- Easy to extend with new effects
 
 [View Documentation →](./balloons-fancy/)
 
@@ -34,16 +38,17 @@ An advanced celebration extension with native macOS system-wide overlay balloons
 
 ## Quick Comparison
 
-| Feature | Balloons | Balloons Fancy |
-|---------|----------|----------------|
+| Feature | Balloons | Visual Effects (Balloons Fancy) |
+|---------|----------|----------------------------------|
 | **Setup** | None | Build macOS app |
 | **Display** | Browser tab | System overlay |
+| **Effects** | Balloons only | Balloons + Fireworks + more! |
 | **Balloon Count** | 30 | 50 |
 | **Colors** | 8 | 24 |
 | **Sizes** | Fixed | Variable |
 | **Performance** | Good | Excellent |
 | **Animation** | CSS | Swift/SwiftUI |
-| **Direction** | Falls from top | Falls from top |
+| **Extensible** | No | Yes |
 
 ## Installation
 
@@ -54,8 +59,12 @@ npm install
 npm run dev
 ```
 
-### Balloons Fancy (Advanced)
+### Visual Effects / Balloons Fancy (Advanced)
 ```bash
+# Quick setup - all in one line:
+cd balloons-fancy/BalloonsApp && ./build.sh && cp -r build/BalloonsApp.app /Applications/ && cd .. && npm install && npm run dev
+
+# Or step by step:
 # 1. Build the native macOS app
 cd balloons-fancy/BalloonsApp
 ./build.sh
@@ -71,7 +80,8 @@ npm run dev
 
 Once installed, open Raycast and type:
 - **"Balloons"** - for the simple browser-based version
-- **"Balloons Fancy"** - for the native overlay version
+- **"Balloons Fancy"** - for native overlay balloons
+- **"Fireworks"** - for native overlay fireworks
 
 ## Development
 

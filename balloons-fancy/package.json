@@ -15,6 +15,12 @@
       "title": "Balloons Fancy",
       "description": "Launch balloons with native overlay animation",
       "mode": "no-view"
+    },
+    {
+      "name": "fireworks",
+      "title": "Fireworks",
+      "description": "Launch fireworks with native overlay animation",
+      "mode": "no-view"
     }
   ],
   "dependencies": {

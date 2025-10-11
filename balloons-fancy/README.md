@@ -1,40 +1,73 @@
-# Balloons Fancy 🎈✨
+# Visual Effects for Raycast 🎈✨🎆
 
-Celebrate with **system-wide overlay balloons**! This extension uses a native macOS app to display beautiful animated balloons falling across your entire screen.
+Celebrate with **system-wide visual effects**! This extension uses a native macOS app to display beautiful animated effects across your entire screen.
 
-![Balloons Fancy Demo](https://img.shields.io/badge/Platform-macOS-blue) ![Swift](https://img.shields.io/badge/Swift-5.0-orange) ![Raycast](https://img.shields.io/badge/Raycast-Extension-red)
+![Platform](https://img.shields.io/badge/Platform-macOS-blue) ![Swift](https://img.shields.io/badge/Swift-5.0-orange) ![Raycast](https://img.shields.io/badge/Raycast-Extension-red)
+
+## Available Effects
+
+### 🎈 Balloons Fancy
+- 50 colorful balloons with 24 vibrant colors
+- Variable sizes (60% to 150%)
+- Smooth falling animation with horizontal drift
+- Duration: ~12 seconds
+
+### 🎆 Fireworks
+- 20-25 explosive firework bursts
+- 80-120 particles per firework (BIG explosions!)
+- 350px explosion radius
+- Radiating particle animations with fade-out
+- System sound effects (Pop & Funk sounds)
+- Duration: ~8 seconds
+
+**Future Improvements:**
+- More impressive explosion patterns (chrysanthemum, willow, palm, etc.)
+- Custom firework sound effects with realistic boom and crackle
+- Varied explosion timing (rockets launching, then bursting)
+- Trail effects as fireworks rise
+- Multiple burst types per show
 
 ## Features
 
-- 🖥️ **System-wide overlay**: Balloons appear on top of all windows
-- 🎨 **50 colorful balloons**: 24 vibrant colors across the rainbow
-- 📏 **Varying sizes**: Each balloon is randomly sized (60% to 150%)
-- 🌊 **Smooth falling motion**: Balloons drift left/right as they fall
+- 🖥️ **System-wide overlay**: Effects appear on top of all windows
+- 🎨 **Multiple effects**: Balloons and fireworks (more coming!)
 - ✨ **Unique every time**: Each trigger creates a completely different pattern
 - 🎭 **Transparent overlay**: Doesn't interfere with your work
 - ⚡ **Native performance**: Built with Swift/SwiftUI for 60fps animation
-- 🚀 **Auto-closes**: Disappears after all balloons exit (12 seconds)
+- 🚀 **Auto-closes**: Disappears after animation completes
+- 🔌 **Extensible**: Easy to add new visual effects
 
-## What Makes It "Fancy"?
+## What Makes It Special?
 
-Unlike the simple "Balloons" extension that opens a browser tab, **Balloons Fancy**:
+Unlike browser-based animations, this extension:
 - Creates a native macOS overlay window (like the built-in Raycast confetti)
 - Appears on top of ALL windows and spaces
 - Uses native Swift/SwiftUI for buttery-smooth animations
+- Supports multiple visual effects from a single app
 - Provides true system-wide celebration effects
 
 ## Installation
 
-### 1. Build the macOS App
+> **📝 IMPORTANT FOR MULTI-MACHINE SETUP:**
+> This project can be synced between machines via git. When you pull on a new machine, simply run the installation steps below. The app name stays as "BalloonsApp" for compatibility, but it supports multiple effects!
 
+### Quick Setup (All-in-One)
+
+```bash
+# From the balloons-fancy directory:
+cd BalloonsApp && ./build.sh && cp -r build/BalloonsApp.app /Applications/ && cd .. && npm install && npm run dev
+```
+
+### Step-by-Step
+
+**1. Build the macOS App**
 ```bash
 cd /Users/loudog/code/extensions/balloons-fancy/BalloonsApp
 ./build.sh
 cp -r build/BalloonsApp.app /Applications/
 ```
 
-### 2. Install Raycast Extension
-
+**2. Install Raycast Extension**
 ```bash
 cd /Users/loudog/code/extensions/balloons-fancy
 npm install
@@ -43,12 +76,19 @@ npm run dev
 
 ## Usage
 
+### Balloons
 1. Open Raycast (⌘ + Space)
 2. Type "Balloons Fancy"
 3. Press Enter
-4. Watch 50 colorful balloons fall across your screen! 🎈
+4. Watch 50 colorful balloons fall! 🎈
 
-**Pro tip**: Trigger it multiple times to see different color combinations and patterns!
+### Fireworks
+1. Open Raycast (⌘ + Space)
+2. Type "Fireworks"
+3. Press Enter
+4. Watch the fireworks explode! 🎆
+
+**Pro tip**: Trigger effects multiple times for spectacular displays!
 
 ## Animation Details
 
@@ -90,12 +130,14 @@ This extension consists of two parts:
 ```
 balloons-fancy/
 ├── BalloonsApp/
-│   ├── BalloonsApp.swift       # Main app and window setup
-│   ├── BalloonsView.swift      # SwiftUI animation views
+│   ├── BalloonsApp.swift       # Main app with effect routing
+│   ├── BalloonsView.swift      # Balloons animation view
+│   ├── FireworksView.swift     # Fireworks animation view
 │   ├── Info.plist              # App configuration
 │   └── build.sh                # Build script
 ├── src/
-│   └── balloons-fancy.tsx      # Raycast extension
+│   ├── balloons-fancy.tsx      # Balloons Raycast command
+│   └── fireworks.tsx           # Fireworks Raycast command
 ├── package.json
 ├── tsconfig.json
 └── README.md
@@ -165,14 +207,52 @@ npm run dev
 - Check that the app is installed: `ls /Applications/BalloonsApp.app`
 - Run directly to see errors: `/Applications/BalloonsApp.app/Contents/MacOS/BalloonsApp`
 
-## Future Enhancements
+## Adding New Effects
 
-- [ ] Sound effects (balloon pops, whooshes)
-- [ ] Custom URL scheme (`balloons://trigger`)
+Want to add a new effect? Here's how:
+
+1. **Create a new SwiftUI view** in `BalloonsApp/` (e.g., `ConfettiView.swift`)
+2. **Add it to the enum** in `BalloonsApp.swift`:
+   ```swift
+   enum EffectType: String {
+       case balloons
+       case fireworks
+       case confetti  // new!
+   }
+   ```
+3. **Add the case to the switch** in `launchEffect()`:
+   ```swift
+   case .confetti:
+       contentView = ConfettiView()
+       duration = 10
+   ```
+4. **Update `build.sh`** to compile the new file
+5. **Create a new Raycast command** in `src/confetti.tsx`
+6. **Add to `package.json`** commands array
+7. **Rebuild and reinstall**: `./build.sh && cp -r build/BalloonsApp.app /Applications/`
+
+## Future Enhancement Ideas
+
+### New Effects
+- [ ] Confetti effect
+- [ ] Hearts floating up
+- [ ] Snow falling
+- [ ] Shooting stars
+- [ ] Sparkles/glitter
+- [ ] Falling leaves (autumn theme)
+
+### Fireworks Improvements
+- [ ] More realistic explosion patterns (chrysanthemum, willow, palm, peony)
+- [ ] Custom high-quality sound effects (boom, crackle, whistle)
+- [ ] Rocket launch trails before explosions
+- [ ] Varied timing (launch → rise → burst)
+- [ ] Different burst colors per explosion layer
+
+### General Features
 - [ ] Configurable settings (count, speed, colors)
-- [ ] Different animation styles (spinning, wobbling)
-- [ ] Balloon burst effect on click
 - [ ] Multi-monitor support
+- [ ] Keyboard shortcuts to trigger effects
+- [ ] Custom color schemes
 
 ## Credits
 

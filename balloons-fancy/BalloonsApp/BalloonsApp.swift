@@ -12,6 +12,11 @@ struct BalloonsApp: App {
     }
 }
 
+enum EffectType: String {
+    case balloons
+    case fireworks
+}
+
 class AppDelegate: NSObject, NSApplicationDelegate {
     var window: NSWindow?
 
@@ -22,12 +27,24 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         NSApp.setActivationPolicy(.accessory)
         print("BalloonsApp: Activation policy set")
 
-        // Launch balloons
-        launchBalloons()
-        print("BalloonsApp: Balloons launched")
+        // Parse command-line arguments to determine which effect to show
+        let arguments = CommandLine.arguments
+        var effect: EffectType = .balloons // Default to balloons for backwards compatibility
+
+        if arguments.count > 1 {
+            let effectArg = arguments[1].lowercased()
+            if effectArg == "fireworks" || effectArg == "--effect=fireworks" {
+                effect = .fireworks
+            }
+        }
+
+        print("BalloonsApp: Launching effect - \(effect.rawValue)")
+
+        // Launch the specified effect
+        launchEffect(effect)
     }
 
-    func launchBalloons() {
+    func launchEffect(_ effect: EffectType) {
         print("BalloonsApp: Getting screen dimensions")
 
         // Get screen dimensions
@@ -54,16 +71,26 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
         print("BalloonsApp: Window created and configured")
 
-        // Set up the SwiftUI view
-        let contentView = BalloonsView()
-        window?.contentView = NSHostingView(rootView: contentView)
+        // Set up the appropriate SwiftUI view based on effect type
+        let contentView: any View
+        let duration: Double
+
+        switch effect {
+        case .balloons:
+            contentView = BalloonsView()
+            duration = 12 // max delay 2s + max duration 10s
+        case .fireworks:
+            contentView = FireworksView()
+            duration = 8 // Fireworks complete faster
+        }
+
+        window?.contentView = NSHostingView(rootView: AnyView(contentView))
         window?.makeKeyAndOrderFront(nil)
 
         print("BalloonsApp: Window displayed")
 
-        // Auto-close after 12 seconds (max delay 2s + max duration 10s)
-        // This ensures all balloons have time to fully exit the screen
-        DispatchQueue.main.asyncAfter(deadline: .now() + 12) {
+        // Auto-close after animation completes
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
             print("BalloonsApp: Auto-closing")
             NSApp.terminate(nil)
         }

@@ -27,7 +27,8 @@ swiftc \
     -framework SwiftUI \
     -framework AppKit \
     BalloonsApp.swift \
-    BalloonsView.swift
+    BalloonsView.swift \
+    FireworksView.swift
 
 # Copy Info.plist
 cp Info.plist "$CONTENTS_DIR/Info.plist"

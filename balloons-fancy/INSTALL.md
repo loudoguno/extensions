@@ -1,10 +1,19 @@
-# Installation Guide for Balloons Fancy 🎈✨
+# Installation Guide for Visual Effects 🎈✨🎆
 
 ## Quick Start
 
-Follow these steps to get Balloons Fancy up and running:
+> **📝 Multi-Machine Setup:** If you're setting this up on a new machine, just follow these steps. The git repo contains everything you need!
 
-### Step 1: Build and Install the macOS App
+### All-in-One Command
+
+```bash
+# From the balloons-fancy directory:
+cd BalloonsApp && ./build.sh && cp -r build/BalloonsApp.app /Applications/ && cd .. && npm install && npm run dev
+```
+
+### Step-by-Step
+
+**Step 1: Build and Install the macOS App**
 
 ```bash
 cd /Users/loudog/code/extensions/balloons-fancy/BalloonsApp
@@ -12,17 +21,23 @@ cd /Users/loudog/code/extensions/balloons-fancy/BalloonsApp
 cp -r build/BalloonsApp.app /Applications/
 ```
 
-The app is already built and installed! ✅
+**Step 2: Install Extension Dependencies**
 
-### Step 2: Open Raycast
+```bash
+cd /Users/loudog/code/extensions/balloons-fancy
+npm install
+npm run dev
+```
+
+**Step 3: Open Raycast and Try It!**
 
 1. Open Raycast (⌘ + Space or your configured hotkey)
-2. Type "Balloons Fancy"
+2. Type "Balloons Fancy" or "Fireworks"
 3. Press Enter
 
-### Step 3: Enjoy! 🎉
+### Success! 🎉
 
-Balloons will appear as a system-wide overlay across your entire screen and automatically disappear after 10 seconds.
+Effects will appear as a system-wide overlay across your entire screen and automatically disappear after completion.
 
 ## Troubleshooting
 
@@ -60,24 +75,39 @@ Or run it from the command line to see debug output:
 /Applications/BalloonsApp.app/Contents/MacOS/BalloonsApp
 ```
 
+## Available Effects
+
+### 🎈 Balloons Fancy
+- 50 colorful balloons
+- Smooth falling animation with drift
+- Duration: ~12 seconds
+
+### 🎆 Fireworks
+- 15-20 explosive bursts
+- Radiating particles with fade
+- Duration: ~8 seconds
+
 ## Features
 
 - ✨ Transparent system-wide overlay
-- 🎨 30 colorful balloons with random positions
-- 🎭 Realistic animations (floating, drifting, swaying strings)
+- 🎨 Multiple visual effects
+- 🎭 Unique every time
 - ⚡ Native Swift performance
-- 🚀 Auto-closes after 10 seconds
+- 🚀 Auto-closes after animation
 
-## How It's Different from "Balloons"
+## Architecture
 
-| Feature | Balloons | Balloons Fancy |
-|---------|----------|----------------|
-| Display Method | Browser window | System overlay |
-| Setup Required | None | Build & install app |
-| User Experience | Opens new tab | Seamless overlay |
-| Performance | Good | Excellent |
-| Interference | Requires clicking away | None |
+This extension has two parts:
+
+1. **BalloonsApp.app** - Native macOS app that handles all visual effects
+2. **Raycast Extension** - TypeScript commands that trigger the app with different arguments
+
+The app accepts command-line arguments to determine which effect to show:
+- No args or `balloons` → Balloons animation
+- `fireworks` → Fireworks animation
 
 ## Next Steps
 
-Try it out! Open Raycast and type "Balloons Fancy" to see the magic! 🎈✨
+Try it out! Open Raycast and type:
+- "Balloons Fancy" for balloons 🎈
+- "Fireworks" for fireworks 🎆
