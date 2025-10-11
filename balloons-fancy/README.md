@@ -42,10 +42,67 @@ Celebrate with **system-wide visual effects**! This extension uses a native macO
 - Wind sound effects (howling, gusts)
 - Different snowflake patterns
 
+### 🧁 Cupcake Explosion
+- Pastel-colored fireworks variant
+- Soft pinks, mint greens, lavender, peach tones
+- Sweet celebration effect
+- Duration: ~8 seconds
+
+### 🔥 Campfire Sparks
+- 150-200 glowing embers rising from bottom
+- Warm red-orange-yellow glow effect
+- Covers 80% of screen width
+- Duration: ~10 seconds
+
+### 🪶 Feather Fall
+- 35-50 large realistic feathers
+- Gentle side-to-side swaying motion
+- Very slow peaceful descent (12-20 seconds)
+- Cream and tan colors with gradient fill
+- Duration: ~25 seconds
+
+### 🍺 Beer Pour
+- Screen fills with golden beer from bottom up
+- 200-300 rising bubbles through the beer
+- Foam head with 100-150 foam bubbles
+- Duration: ~6 seconds
+
+**Future Improvements:**
+- Foam texture improvements
+- Better bubble physics
+- Carbonation sparkle effects
+- Pouring sound effects
+
+### 🍁 Autumn Leaves
+- 80-120 falling autumn leaves
+- Red, orange, and brown colors
+- Custom leaf shapes with spinning rotation (720°)
+- Duration: ~12 seconds
+
+### 🌈 Rainbow Arc
+- Full 7-color ROYGBIV rainbow (red, orange, yellow, green, blue, indigo, violet)
+- Large arc across top 30% of screen (90% width)
+- Fade in → shimmer → fade out sequence
+- Duration: ~8 seconds
+
+### 👾 Space Invaders
+- 40 alien invaders in 4 rows of 10
+- Classic Space Invaders formation and movement
+- Side-to-side marching while descending
+- Dark space background for retro gaming feel
+- Duration: ~8 seconds
+
+### 🪐 Galaxy Warp
+- 300 stars warping from center outward
+- Long dramatic star streaks (300px) with blue gradient trails
+- Stars rotate to point in travel direction
+- Dark space background with motion blur for hyperspace effect
+- Duration: ~8 seconds
+
 ## Features
 
 - 🖥️ **System-wide overlay**: Effects appear on top of all windows
-- 🎨 **Multiple effects**: Balloons, fireworks, and snow blizzard!
+- 🎨 **11 unique effects**: From peaceful feathers to intense space warps!
 - ✨ **Unique every time**: Each trigger creates a completely different pattern
 - 🎭 **Transparent overlay**: Doesn't interfere with your work
 - ⚡ **Native performance**: Built with Swift/SwiftUI for 60fps animation
@@ -91,25 +148,21 @@ npm run dev
 
 ## Usage
 
-### Balloons
-1. Open Raycast (⌘ + Space)
-2. Type "Balloons Fancy"
-3. Press Enter
-4. Watch 50 colorful balloons fall! 🎈
+Simply open Raycast (⌘ + Space) and type the name of any effect:
 
-### Fireworks
-1. Open Raycast (⌘ + Space)
-2. Type "Fireworks"
-3. Press Enter
-4. Watch the fireworks explode! 🎆
+- **balloons** or **balloons-fancy** - 🎈 Colorful balloons falling
+- **fireworks** - 🎆 Explosive bursts
+- **snow** - ❄️ Blizzard whiteout
+- **cupcake** - 🧁 Pastel explosion
+- **campfire** - 🔥 Rising embers
+- **feather** - 🪶 Gentle feathers
+- **beer** - 🍺 Beer pour
+- **leaves** - 🍁 Autumn leaves
+- **rainbow** - 🌈 Rainbow arc
+- **pixels** - 👾 Space Invaders
+- **galaxy** - 🪐 Hyperspace warp
 
-### Snow
-1. Open Raycast (⌘ + Space)
-2. Type "Snow"
-3. Press Enter
-4. Experience a complete whiteout blizzard! ❄️💨
-
-**Pro tip**: Trigger effects multiple times for spectacular displays!
+**Pro tip**: Trigger effects multiple times for spectacular displays! Each effect has a unique icon in Raycast for easy identification.
 
 ## Animation Details
 
@@ -151,18 +204,35 @@ This extension consists of two parts:
 ```
 balloons-fancy/
 ├── BalloonsApp/
-│   ├── BalloonsApp.swift       # Main app with effect routing
+│   ├── BalloonsApp.swift       # Main app with effect routing (11 effects)
 │   ├── BalloonsView.swift      # Balloons animation view
 │   ├── FireworksView.swift     # Fireworks animation view
 │   ├── SnowView.swift          # Snow/blizzard animation view
+│   ├── CupcakeView.swift       # Cupcake explosion view
+│   ├── CampfireView.swift      # Campfire sparks view
+│   ├── FeatherView.swift       # Feather fall view
+│   ├── BeerView.swift          # Beer pour view
+│   ├── LeavesView.swift        # Autumn leaves view
+│   ├── RainbowView.swift       # Rainbow arc view
+│   ├── PixelsView.swift        # Space Invaders view
+│   ├── GalaxyView.swift        # Galaxy warp view
 │   ├── Info.plist              # App configuration
-│   └── build.sh                # Build script
+│   └── build.sh                # Build script (compiles all 11 views)
 ├── src/
 │   ├── balloons-fancy.tsx      # Balloons Raycast command
 │   ├── fireworks.tsx           # Fireworks Raycast command
-│   └── snow.tsx                # Snow Raycast command
-├── package.json
+│   ├── snow.tsx                # Snow Raycast command
+│   ├── cupcake.tsx             # Cupcake Raycast command
+│   ├── campfire.tsx            # Campfire Raycast command
+│   ├── feather.tsx             # Feather Raycast command
+│   ├── beer.tsx                # Beer Raycast command
+│   ├── leaves.tsx              # Leaves Raycast command
+│   ├── rainbow.tsx             # Rainbow Raycast command
+│   ├── pixels.tsx              # Space Invaders Raycast command
+│   └── galaxy.tsx              # Galaxy warp Raycast command
+├── package.json                # Extension manifest with 11 commands
 ├── tsconfig.json
+├── EFFECTS.md                  # Quick reference guide
 └── README.md
 ```
 

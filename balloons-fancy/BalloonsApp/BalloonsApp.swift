@@ -16,6 +16,14 @@ enum EffectType: String {
     case balloons
     case fireworks
     case snow
+    case cupcake
+    case campfire
+    case feather
+    case beer
+    case leaves
+    case rainbow
+    case pixels
+    case galaxy
 }
 
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -38,6 +46,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
                 effect = .fireworks
             } else if effectArg == "snow" || effectArg == "--effect=snow" {
                 effect = .snow
+            } else if effectArg == "cupcake" || effectArg == "--effect=cupcake" {
+                effect = .cupcake
+            } else if effectArg == "campfire" || effectArg == "--effect=campfire" {
+                effect = .campfire
+            } else if effectArg == "feather" || effectArg == "--effect=feather" {
+                effect = .feather
+            } else if effectArg == "beer" || effectArg == "--effect=beer" {
+                effect = .beer
+            } else if effectArg == "leaves" || effectArg == "--effect=leaves" {
+                effect = .leaves
+            } else if effectArg == "rainbow" || effectArg == "--effect=rainbow" {
+                effect = .rainbow
+            } else if effectArg == "pixels" || effectArg == "--effect=pixels" {
+                effect = .pixels
+            } else if effectArg == "galaxy" || effectArg == "--effect=galaxy" {
+                effect = .galaxy
             }
         }
 
@@ -88,6 +112,30 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         case .snow:
             contentView = SnowView()
             duration = 10 // max delay 1.5s + max duration 8s for blizzard
+        case .cupcake:
+            contentView = CupcakeView()
+            duration = 8 // Same as fireworks
+        case .campfire:
+            contentView = CampfireView()
+            duration = 10 // max delay 3s + max duration 6s
+        case .feather:
+            contentView = FeatherView()
+            duration = 25 // max delay 5s + max duration 20s - very peaceful
+        case .beer:
+            contentView = BeerView()
+            duration = 6 // 3s fill + 1.5s foam + 1.5s display
+        case .leaves:
+            contentView = LeavesView()
+            duration = 12 // max delay 3s + duration 8s
+        case .rainbow:
+            contentView = RainbowView()
+            duration = 8 // fade in 1.5s + shimmer 4.5s + fade out 1.5s
+        case .pixels:
+            contentView = PixelsView()
+            duration = 8 // cascade animation
+        case .galaxy:
+            contentView = GalaxyView()
+            duration = 8 // warp speed effect with longer streaks
         }
 
         window?.contentView = NSHostingView(rootView: AnyView(contentView))

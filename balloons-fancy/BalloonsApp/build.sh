@@ -29,7 +29,15 @@ swiftc \
     BalloonsApp.swift \
     BalloonsView.swift \
     FireworksView.swift \
-    SnowView.swift
+    SnowView.swift \
+    CupcakeView.swift \
+    CampfireView.swift \
+    FeatherView.swift \
+    BeerView.swift \
+    LeavesView.swift \
+    RainbowView.swift \
+    PixelsView.swift \
+    GalaxyView.swift
 
 # Copy Info.plist
 cp Info.plist "$CONTENTS_DIR/Info.plist"
