@@ -27,10 +27,25 @@ Celebrate with **system-wide visual effects**! This extension uses a native macO
 - Trail effects as fireworks rise
 - Multiple burst types per show
 
+### ❄️ Snow (Blizzard Mode!)
+- 500-700 snowflakes for complete whiteout conditions
+- Beautiful 6-pointed snowflake design with branches
+- Variable sizes (30% to 200%)
+- Fast blizzard speed (3-7 second fall)
+- Extreme wind drift (±400 pixels)
+- Rapid rotation in wind gusts
+- Duration: ~10 seconds
+
+**Future Improvements:**
+- Gentle snow mode option (slower, fewer flakes)
+- Accumulation effect at bottom of screen
+- Wind sound effects (howling, gusts)
+- Different snowflake patterns
+
 ## Features
 
 - 🖥️ **System-wide overlay**: Effects appear on top of all windows
-- 🎨 **Multiple effects**: Balloons and fireworks (more coming!)
+- 🎨 **Multiple effects**: Balloons, fireworks, and snow blizzard!
 - ✨ **Unique every time**: Each trigger creates a completely different pattern
 - 🎭 **Transparent overlay**: Doesn't interfere with your work
 - ⚡ **Native performance**: Built with Swift/SwiftUI for 60fps animation
@@ -88,6 +103,12 @@ npm run dev
 3. Press Enter
 4. Watch the fireworks explode! 🎆
 
+### Snow
+1. Open Raycast (⌘ + Space)
+2. Type "Snow"
+3. Press Enter
+4. Experience a complete whiteout blizzard! ❄️💨
+
 **Pro tip**: Trigger effects multiple times for spectacular displays!
 
 ## Animation Details
@@ -133,11 +154,13 @@ balloons-fancy/
 │   ├── BalloonsApp.swift       # Main app with effect routing
 │   ├── BalloonsView.swift      # Balloons animation view
 │   ├── FireworksView.swift     # Fireworks animation view
+│   ├── SnowView.swift          # Snow/blizzard animation view
 │   ├── Info.plist              # App configuration
 │   └── build.sh                # Build script
 ├── src/
 │   ├── balloons-fancy.tsx      # Balloons Raycast command
-│   └── fireworks.tsx           # Fireworks Raycast command
+│   ├── fireworks.tsx           # Fireworks Raycast command
+│   └── snow.tsx                # Snow Raycast command
 ├── package.json
 ├── tsconfig.json
 └── README.md
@@ -234,21 +257,30 @@ Want to add a new effect? Here's how:
 ## Future Enhancement Ideas
 
 ### New Effects
+- [x] Snow/Blizzard ❄️ (DONE!)
 - [ ] Confetti effect
 - [ ] Hearts floating up
-- [ ] Snow falling
 - [ ] Shooting stars
 - [ ] Sparkles/glitter
 - [ ] Falling leaves (autumn theme)
+- [ ] Rain/storm effect
 
-### Fireworks Improvements
+### Effect Improvements
+**Fireworks:**
 - [ ] More realistic explosion patterns (chrysanthemum, willow, palm, peony)
 - [ ] Custom high-quality sound effects (boom, crackle, whistle)
 - [ ] Rocket launch trails before explosions
 - [ ] Varied timing (launch → rise → burst)
 - [ ] Different burst colors per explosion layer
 
+**Snow:**
+- [ ] Gentle snow mode option (slower, fewer flakes)
+- [ ] Accumulation effect at bottom of screen
+- [ ] Wind sound effects (howling, gusts)
+- [ ] Different snowflake patterns
+
 ### General Features
+- [ ] Better sound effects for all animations (high priority!)
 - [ ] Configurable settings (count, speed, colors)
 - [ ] Multi-monitor support
 - [ ] Keyboard shortcuts to trigger effects

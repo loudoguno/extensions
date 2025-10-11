@@ -32,7 +32,7 @@ npm run dev
 **Step 3: Open Raycast and Try It!**
 
 1. Open Raycast (⌘ + Space or your configured hotkey)
-2. Type "Balloons Fancy" or "Fireworks"
+2. Type "Balloons Fancy", "Fireworks", or "Snow"
 3. Press Enter
 
 ### Success! 🎉
@@ -83,9 +83,16 @@ Or run it from the command line to see debug output:
 - Duration: ~12 seconds
 
 ### 🎆 Fireworks
-- 15-20 explosive bursts
-- Radiating particles with fade
+- 20-25 explosive bursts
+- 80-120 particles per burst
+- System sound effects
 - Duration: ~8 seconds
+
+### ❄️ Snow (Blizzard!)
+- 500-700 snowflakes
+- Extreme wind and speed
+- Complete whiteout conditions
+- Duration: ~10 seconds
 
 ## Features
 
@@ -105,9 +112,13 @@ This extension has two parts:
 The app accepts command-line arguments to determine which effect to show:
 - No args or `balloons` → Balloons animation
 - `fireworks` → Fireworks animation
+- `snow` → Snow/blizzard animation
 
 ## Next Steps
 
 Try it out! Open Raycast and type:
 - "Balloons Fancy" for balloons 🎈
 - "Fireworks" for fireworks 🎆
+- "Snow" for blizzard ❄️
+
+**Note:** Sound effects are currently using macOS system sounds. Better custom sound effects coming soon!

@@ -17,18 +17,20 @@ A simple celebration extension that displays colorful animated balloons in your 
 
 ---
 
-### 🎈✨🎆 Visual Effects (Balloons Fancy)
+### 🎈✨🎆❄️ Visual Effects (Balloons Fancy)
 An advanced celebration extension with native macOS system-wide overlay effects.
 
 **Available Effects:**
 - 🎈 Balloons: 50 balloons with 24 vibrant colors, falling animation
-- 🎆 Fireworks: 15-20 explosive bursts with radiating particles
+- 🎆 Fireworks: 20-25 explosive bursts with sound effects
+- ❄️ Snow: 500-700 snowflakes in complete whiteout blizzard
 
 **Features:**
 - System-wide overlay (appears over all apps)
 - Multiple visual effects from one app
 - Variable sizes and colors
 - Native Swift/SwiftUI performance
+- Sound effects (system sounds, custom sounds coming soon!)
 - Unique random pattern each time
 - Easy to extend with new effects
 
@@ -42,12 +44,13 @@ An advanced celebration extension with native macOS system-wide overlay effects.
 |---------|----------|----------------------------------|
 | **Setup** | None | Build macOS app |
 | **Display** | Browser tab | System overlay |
-| **Effects** | Balloons only | Balloons + Fireworks + more! |
+| **Effects** | Balloons only | Balloons + Fireworks + Snow! |
 | **Balloon Count** | 30 | 50 |
 | **Colors** | 8 | 24 |
 | **Sizes** | Fixed | Variable |
 | **Performance** | Good | Excellent |
 | **Animation** | CSS | Swift/SwiftUI |
+| **Sound** | None | System sounds |
 | **Extensible** | No | Yes |
 
 ## Installation
@@ -81,7 +84,8 @@ npm run dev
 Once installed, open Raycast and type:
 - **"Balloons"** - for the simple browser-based version
 - **"Balloons Fancy"** - for native overlay balloons
-- **"Fireworks"** - for native overlay fireworks
+- **"Fireworks"** - for explosive fireworks with sound
+- **"Snow"** - for an intense whiteout blizzard
 
 ## Development
 

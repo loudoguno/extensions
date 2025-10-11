@@ -21,6 +21,12 @@
       "title": "Fireworks",
       "description": "Launch fireworks with native overlay animation",
       "mode": "no-view"
+    },
+    {
+      "name": "snow",
+      "title": "Snow",
+      "description": "Let it snow with gentle falling snowflakes",
+      "mode": "no-view"
     }
   ],
   "dependencies": {

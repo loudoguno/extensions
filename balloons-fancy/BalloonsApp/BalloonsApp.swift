@@ -15,6 +15,7 @@ struct BalloonsApp: App {
 enum EffectType: String {
     case balloons
     case fireworks
+    case snow
 }
 
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -35,6 +36,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             let effectArg = arguments[1].lowercased()
             if effectArg == "fireworks" || effectArg == "--effect=fireworks" {
                 effect = .fireworks
+            } else if effectArg == "snow" || effectArg == "--effect=snow" {
+                effect = .snow
             }
         }
 
@@ -82,6 +85,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         case .fireworks:
             contentView = FireworksView()
             duration = 8 // Fireworks complete faster
+        case .snow:
+            contentView = SnowView()
+            duration = 10 // max delay 1.5s + max duration 8s for blizzard
         }
 
         window?.contentView = NSHostingView(rootView: AnyView(contentView))
