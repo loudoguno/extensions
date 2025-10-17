@@ -30,7 +30,7 @@ This file is for brainstorming and tracking ideas for new Raycast extensions.
   -
   -
 - **UI Type**:
-- **APIs/Services**:
+- **APIs/Services**:  
 - **Priority**:
 - **Status**: Idea
 
