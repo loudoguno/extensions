@@ -128,10 +128,12 @@ export default function MenuBar() {
   const [usage, setUsage] = useState<UsageData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const fetchUsage = async () => {
+  const fetchUsage = async (interactive = false) => {
     setIsLoading(true);
     try {
-      const result = await runAppleScript();
+      // Use quiet mode by default to avoid opening Safari windows
+      // Only use interactive mode when user explicitly requests refresh
+      const result = await runAppleScript({ quiet: !interactive });
       setUsage(result);
     } catch (error) {
       setUsage({
@@ -205,7 +207,7 @@ export default function MenuBar() {
           title="Refresh"
           shortcut={{ modifiers: ["cmd"], key: "r" }}
           onAction={async () => {
-            await fetchUsage();
+            await fetchUsage(true); // Interactive mode - will open Safari if needed
             await showHUD("Usage refreshed");
           }}
         />

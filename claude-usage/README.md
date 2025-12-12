@@ -25,12 +25,21 @@ Comprehensive productivity tracker that scans your Claude Code sessions.
 - **Activity Heatmap**: GitHub-style visualization of your coding activity
 - **Peak Hours Chart**: See when you're most productive
 - **Tool Usage Breakdown**: Visual bars showing which tools you use most
+- **Git Status Indicators**: Shows version control status for each project
+  - `⑃` - Git repository (local only)
+  - `⑃☁️` - Published to GitHub
 - **Copy for Standup**: One-click copy a markdown summary for team standups
 
 **Keyboard Shortcuts:**
 - `⌘R` - Refresh
 - `⌘C` - Copy summary for standup
 - `Tab` - Access time range options
+
+### 4. Claude Code Weekly Summary
+Opens directly to the past 7 days view with all the same features as Daily Summary.
+
+### 5. Claude Code Monthly Summary
+Opens directly to the past 30 days view with all the same features as Daily Summary.
 
 ---
 
@@ -51,6 +60,8 @@ npm run dev
 #    - "Show Claude Usage"
 #    - "Claude Usage Menu Bar"
 #    - "Claude Code Daily Summary"
+#    - "Claude Code Weekly Summary"
+#    - "Claude Code Monthly Summary"
 ```
 
 ---
@@ -165,16 +176,20 @@ killall Raycast && open -a Raycast
 
 ```
 claude-tools/
-├── package.json           # Extension config & commands
-├── tsconfig.json          # TypeScript config
+├── package.json            # Extension config & commands
+├── tsconfig.json           # TypeScript config
+├── CHANGELOG.md            # Version history
 ├── src/
-│   ├── show-usage.tsx     # Usage dashboard with pacing
-│   ├── menu-bar.tsx       # Menu bar command
-│   ├── daily-summary.tsx  # Productivity summary
+│   ├── show-usage.tsx      # Usage dashboard with pacing
+│   ├── menu-bar.tsx        # Menu bar command
+│   ├── daily-summary.tsx   # Daily productivity summary
+│   ├── weekly-summary.tsx  # Weekly productivity summary
+│   ├── monthly-summary.tsx # Monthly productivity summary
 │   └── utils/
-│       └── applescript.ts # Safari automation
-├── assets/                # Icons
-└── dist/                  # Built extension
+│       ├── applescript.ts  # Safari automation
+│       └── git.ts          # Git/GitHub status detection
+├── assets/                 # Icons
+└── dist/                   # Built extension
 ```
 
 ---

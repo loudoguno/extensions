@@ -25,6 +25,18 @@
       "title": "Claude Code Daily Summary",
       "description": "See what you accomplished with Claude Code today",
       "mode": "view"
+    },
+    {
+      "name": "weekly-summary",
+      "title": "Claude Code Weekly Summary",
+      "description": "See what you accomplished with Claude Code this week",
+      "mode": "view"
+    },
+    {
+      "name": "monthly-summary",
+      "title": "Claude Code Monthly Summary",
+      "description": "See what you accomplished with Claude Code this month",
+      "mode": "view"
     }
   ],
   "dependencies": {

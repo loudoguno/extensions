@@ -21,7 +21,82 @@ interface UsageResult {
   error?: string;
 }
 
-const APPLESCRIPT = `
+// Quiet mode: only reads from existing tab, never opens Safari or creates tabs
+const APPLESCRIPT_QUIET = `
+-- AppleScript to fetch Claude usage from Safari (quiet mode - no new windows)
+-- Requires: Safari > Develop > Allow JavaScript from Apple Events
+
+tell application "System Events"
+    if not (exists process "Safari") then
+        return "NO_SAFARI"
+    end if
+end tell
+
+tell application "Safari"
+    -- Look for existing Claude usage tab
+    set foundTab to missing value
+
+    repeat with w in windows
+        repeat with t in tabs of w
+            if URL of t contains "claude.ai/settings/usage" then
+                set foundTab to t
+                exit repeat
+            end if
+        end repeat
+        if foundTab is not missing value then exit repeat
+    end repeat
+
+    -- If no existing tab, return without opening anything
+    if foundTab is missing value then
+        return "NO_TAB"
+    end if
+
+    -- Extract usage data using JavaScript
+    set jsCode to "
+    (function() {
+        try {
+            const bodyText = document.body.innerText;
+
+            // Parse current session
+            const sessionMatch = bodyText.match(/Current session[\\\\s\\\\S]*?Resets in ([^\\\\n]+)[\\\\s\\\\S]*?(\\\\d+)% used/i);
+
+            // Parse all models
+            const allModelsMatch = bodyText.match(/All models[\\\\s\\\\S]*?Resets ([^\\\\n]+)[\\\\s\\\\S]*?(\\\\d+)% used/i);
+
+            // Parse sonnet
+            const sonnetMatch = bodyText.match(/Sonnet only[\\\\s\\\\S]*?Resets ([^\\\\n]+)[\\\\s\\\\S]*?(\\\\d+)% used/i);
+
+            return JSON.stringify({
+                currentSession: sessionMatch ? {
+                    resetsIn: sessionMatch[1].trim(),
+                    percentage: parseInt(sessionMatch[2])
+                } : null,
+                allModels: allModelsMatch ? {
+                    resetsAt: allModelsMatch[1].trim(),
+                    percentage: parseInt(allModelsMatch[2])
+                } : null,
+                sonnet: sonnetMatch ? {
+                    resetsAt: sonnetMatch[1].trim(),
+                    percentage: parseInt(sonnetMatch[2])
+                } : null
+            });
+        } catch (e) {
+            return JSON.stringify({ error: e.message });
+        }
+    })();
+    "
+
+    try
+        set result to do JavaScript jsCode in foundTab
+        return result
+    on error errMsg
+        return "ERROR: " & errMsg
+    end try
+end tell
+`;
+
+// Interactive mode: will open Safari and create tab if needed
+const APPLESCRIPT_INTERACTIVE = `
 -- AppleScript to fetch Claude usage from Safari
 -- Requires: Safari > Develop > Allow JavaScript from Apple Events
 
@@ -121,10 +196,13 @@ tell application "Safari"
 end tell
 `;
 
-export async function runAppleScript(): Promise<UsageResult> {
+export async function runAppleScript(options: { quiet?: boolean } = {}): Promise<UsageResult> {
+  const { quiet = false } = options;
+  const script = quiet ? APPLESCRIPT_QUIET : APPLESCRIPT_INTERACTIVE;
+
   try {
     // Run the AppleScript
-    const { stdout, stderr } = await execAsync(`osascript -e '${APPLESCRIPT.replace(/'/g, "'\"'\"'")}'`, {
+    const { stdout, stderr } = await execAsync(`osascript -e '${script.replace(/'/g, "'\"'\"'")}'`, {
       timeout: 60000, // 60 second timeout
     });
 
@@ -143,6 +221,18 @@ export async function runAppleScript(): Promise<UsageResult> {
           sonnet: { usedPercentage: null, resetsAt: null },
         },
         error: output.replace("ERROR: ", ""),
+      };
+    }
+
+    // Handle quiet mode responses (not errors, just no data available)
+    if (output === "NO_SAFARI" || output === "NO_TAB") {
+      return {
+        currentSession: { usedPercentage: null, resetsIn: null },
+        weekly: {
+          allModels: { usedPercentage: null, resetsAt: null },
+          sonnet: { usedPercentage: null, resetsAt: null },
+        },
+        // No error - just no data available in quiet mode
       };
     }
 

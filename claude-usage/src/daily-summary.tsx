@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { homedir } from "os";
 import { readdir, readFile, stat } from "fs/promises";
 import { join } from "path";
+import { checkGitStatus, getGitStatusSymbol, GitStatus } from "./utils/git";
 
 // ============================================================================
 // Types
@@ -19,6 +20,7 @@ interface SessionActivity {
   toolsUsed: Record<string, number>;
   codeBlockCount: number;
   linesWritten: number;
+  gitStatus?: GitStatus;
 }
 
 interface DailySummary {
@@ -37,7 +39,7 @@ interface DailySummary {
   error?: string;
 }
 
-type TimeRange = "today" | "yesterday" | "week" | "month" | "custom";
+export type TimeRange = "today" | "yesterday" | "week" | "month" | "custom";
 
 interface TimeRangeConfig {
   label: string;
@@ -240,6 +242,7 @@ async function scanActivity(range: TimeRange): Promise<DailySummary> {
   try {
     const projectDirs = await readdir(PROJECTS_DIR);
     const allToolUsage: Record<string, number> = {};
+    const gitStatusCache: Record<string, GitStatus> = {}; // Cache git status per project
 
     for (const projectDir of projectDirs) {
       if (projectDir.startsWith(".")) continue;
@@ -250,6 +253,12 @@ async function scanActivity(range: TimeRange): Promise<DailySummary> {
 
       const originalPath = "/" + projectDir.replace(/-/g, "/").replace(/^\//, "");
       const projectName = projectDir.split("-").pop() || projectDir;
+
+      // Check git status for this project (cache it)
+      if (!gitStatusCache[originalPath]) {
+        gitStatusCache[originalPath] = await checkGitStatus(originalPath);
+      }
+      const gitStatus = gitStatusCache[originalPath];
 
       const sessionFiles = await readdir(projectPath);
 
@@ -267,6 +276,7 @@ async function scanActivity(range: TimeRange): Promise<DailySummary> {
         const activity = await parseSessionFile(sessionPath, projectName, originalPath, config.startDate, config.endDate);
 
         if (activity && activity.userPrompts.length > 0) {
+          activity.gitStatus = gitStatus; // Add git status to activity
           summary.sessions.push(activity);
           summary.totalPrompts += activity.userPrompts.length;
           summary.totalFilesCreated += [...new Set(activity.filesCreated)].length;
@@ -464,8 +474,9 @@ function generateMarkdown(summary: DailySummary): string {
       const totalPrompts = sessions.reduce((sum, s) => sum + s.userPrompts.length, 0);
       const latestSession = sessions[0];
       const time = latestSession.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+      const gitSymbol = latestSession.gitStatus ? getGitStatusSymbol(latestSession.gitStatus) : "";
 
-      md += `### ${projectName}\n`;
+      md += `### ${gitSymbol ? gitSymbol + " " : ""}${projectName}\n`;
       md += `📁 \`${latestSession.projectPath}\`\n`;
       md += `*${totalPrompts} prompts · Last active ${time}*\n\n`;
 
@@ -538,10 +549,14 @@ function generateStandupText(summary: DailySummary): string {
 // Component
 // ============================================================================
 
-export default function DailySummaryCommand() {
+interface SummaryCommandProps {
+  initialRange?: TimeRange;
+}
+
+export function SummaryCommand({ initialRange = "today" }: SummaryCommandProps) {
   const [summary, setSummary] = useState<DailySummary | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [timeRange, setTimeRange] = useState<TimeRange>("today");
+  const [timeRange, setTimeRange] = useState<TimeRange>(initialRange);
 
   const fetchSummary = async (range: TimeRange) => {
     setIsLoading(true);
@@ -560,7 +575,7 @@ export default function DailySummaryCommand() {
   };
 
   useEffect(() => {
-    fetchSummary("today");
+    fetchSummary(initialRange);
   }, []);
 
   const copyForStandup = async () => {
@@ -623,4 +638,9 @@ export default function DailySummaryCommand() {
       }
     />
   );
+}
+
+// Default export for daily-summary command
+export default function DailySummaryCommand() {
+  return <SummaryCommand initialRange="today" />;
 }
